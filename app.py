@@ -22,12 +22,12 @@ from flask import (
     request,
 )
 
-
 app = Flask(__name__)
 
 @app.route('/levelColor', methods=['GET', 'POST'])
 
 #/levelColor?color=orange&level=50
+# Set Colour Level
 
 def setLevelColor():
     pixels.clear()
