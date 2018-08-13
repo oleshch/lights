@@ -57,9 +57,9 @@ def setLevelColor():
 def power():
 
     state = urllib.request.unquote(request.values['state']).strip().lower()
-    pixels.clear()
     if state.__contains__("off"):
         pixels.clear()
+        pixels.show()
     elif state.__contains__("on"):
         pixels.clear()
         for k in range(pixels.count()):
