@@ -31,7 +31,7 @@ app = Flask(__name__)
 
 def setLevelColor():
     pixels.clear()
-    print(request)
+
     color = urllib.request.unquote(request.values['color']).strip()
     number = int(urllib.request.unquote(request.values['level']).strip())
 
@@ -50,7 +50,23 @@ def setLevelColor():
             pixels.set_pixel(k, Adafruit_WS2801.RGB_to_color(255,234,76))
         pixels.show()
 
-    return "Color: %s Level: %s" % (color, number)
+    return "Color: %s Level: %s\n" % (color, number)
+
+@app.route('/power', methods=['GET', 'POST'])
+
+def power():
+
+    state = urllib.request.unquote(request.values['state']).strip().lower()
+    pixels.clear()
+    if state.__contains__("off"):
+        pixels.clear()
+    elif state.__contains__("on"):
+        pixels.clear()
+        for k in range(pixels.count()):
+            pixels.set_pixel(k, Adafruit_WS2801.RGB_to_color(255,255,255))
+        pixels.show()
+
+    return "Lights set to %s\n" % (state)
 
 if __name__ == "__main__":
     app.run('0.0.0.0', 5300, debug=True)
