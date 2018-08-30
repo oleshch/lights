@@ -24,7 +24,7 @@ from flask import (
 
 app = Flask(__name__)
 
-@app.route('/levelColor', methods=['GET', 'POST'])
+@app.route('/lights/levelColor', methods=['GET', 'POST'])
 
 #/levelColor?color=orange&level=50
 # Set Colour Level
@@ -52,7 +52,7 @@ def setLevelColor():
 
     return "Color: %s Level: %s\n" % (color, number)
 
-@app.route('/power', methods=['GET', 'POST'])
+@app.route('/lights/power', methods=['GET', 'POST'])
 
 def power():
 
