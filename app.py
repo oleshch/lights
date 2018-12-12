@@ -24,6 +24,17 @@ from flask import (
 
 app = Flask(__name__)
 
+# Define the wheel function to interpolate between different hues.
+def wheel(pos):
+    if pos < 85:
+        return Adafruit_WS2801.RGB_to_color(pos * 3, 255 - pos * 3, 0)
+    elif pos < 170:
+        pos -= 85
+        return Adafruit_WS2801.RGB_to_color(255 - pos * 3, 0, pos * 3)
+    else:
+        pos -= 170
+        return Adafruit_WS2801.RGB_to_color(0, pos * 3, 255 - pos * 3)
+
 @app.route('/lights/levelColor', methods=['GET', 'POST'])
 
 #/levelColor?color=orange&level=50
@@ -83,7 +94,7 @@ def power():
     elif state.__contains__("on"):
         pixels.clear()
         for k in range(pixels.count()):
-            pixels.set_pixel(k, Adafruit_WS2801.RGB_to_color(255,228,206))
+            pixels.set_pixel(k, Adafruit_WS2801.RGB_to_color(255,206,166))
         pixels.show()
 
     return "Lights set to %s\n" % (state)
