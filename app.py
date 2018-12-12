@@ -72,12 +72,9 @@ def setLevelColor():
 def party():
     pixels.clear()
 
-    for i in range(pixels.count()):
-        # tricky math! we use each pixel as a fraction of the full 96-color wheel
-        # (thats the i / strip.numPixels() part)
-        # Then add in j which makes the colors go around per pixel
-        # the % 96 is to make the wheel cycle around
-        pixels.set_pixel(i, wheel(((i * 256 // pixels.count())) % 256) )
+    for j in range(256): # one cycle of all 256 colors in the wheel
+        for i in range(pixels.count()):
+            pixels.set_pixel(i, wheel(((i * 256 // pixels.count()) + j) % 256) )
         pixels.show()
         sleep(0.5)
 
@@ -94,7 +91,7 @@ def power():
     elif state.__contains__("on"):
         pixels.clear()
         for k in range(pixels.count()):
-            pixels.set_pixel(k, Adafruit_WS2801.RGB_to_color(255,177,110))
+            pixels.set_pixel(k, Adafruit_WS2801.RGB_to_color(255,159,70))
         pixels.show()
 
     return "Lights set to %s\n" % (state)
