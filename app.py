@@ -79,7 +79,7 @@ def party():
         # the % 96 is to make the wheel cycle around
         pixels.set_pixel(i, wheel(((i * 256 // pixels.count())) % 256) )
         pixels.show()
-        time.sleep(0.5)
+        sleep(0.5)
 
     return "PARTY!!\n"
 
