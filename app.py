@@ -6,7 +6,6 @@ import urllib.request
 # Import the WS2801 module.
 import Adafruit_WS2801
 import Adafruit_GPIO.SPI as SPI
-from threading import Thread
 
 # Configure the count of pixels:
 PIXEL_COUNT = 96
@@ -72,15 +71,12 @@ def setLevelColor():
 def party():
     pixels.clear()
 
-    def start_party():
-        for j in range(256): # one cycle of all 256 colors in the wheel
-            for i in range(pixels.count()):
-                pixels.set_pixel(i, wheel(((i * 256 // pixels.count()) + j) % 256) )
-            pixels.show()
-            sleep(0.5)
+    for j in range(256): # one cycle of all 256 colors in the wheel
+        for i in range(pixels.count()):
+            pixels.set_pixel(i, wheel(((i * 256 // pixels.count()) + j) % 256) )
+        pixels.show()
+        sleep(0.5)
 
-    thread = Thread(target=start_party)
-    thread.start()
     return "PARTY STARTED!!\n"
 
 @app.route('/lights/power', methods=['GET', 'POST'])
@@ -94,7 +90,7 @@ def power():
     elif state.__contains__("on"):
         pixels.clear()
         for k in range(pixels.count()):
-            pixels.set_pixel(k, Adafruit_WS2801.RGB_to_color(255,159,70))
+            pixels.set_pixel(k, Adafruit_WS2801.RGB_to_color(255,228,206))
         pixels.show()
 
     return "Lights set to %s\n" % (state)
