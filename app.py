@@ -94,7 +94,7 @@ def power():
     elif state.__contains__("on"):
         pixels.clear()
         for k in range(pixels.count()):
-            pixels.set_pixel(k, Adafruit_WS2801.RGB_to_color(255,206,166))
+            pixels.set_pixel(k, Adafruit_WS2801.RGB_to_color(255,177,110))
         pixels.show()
 
     return "Lights set to %s\n" % (state)
