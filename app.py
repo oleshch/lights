@@ -58,7 +58,7 @@ def setLevelColor():
 #/levelColor
 # Set Colour Level
 
-def setLevelColor():
+def party():
     pixels.clear()
 
     for i in range(pixels.count()):
