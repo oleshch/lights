@@ -6,7 +6,7 @@ import urllib.request
 # Import the WS2801 module.
 import Adafruit_WS2801
 import Adafruit_GPIO.SPI as SPI
-
+from threading import Thread
 
 # Configure the count of pixels:
 PIXEL_COUNT = 96
