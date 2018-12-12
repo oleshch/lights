@@ -72,13 +72,16 @@ def setLevelColor():
 def party():
     pixels.clear()
 
-    for j in range(256): # one cycle of all 256 colors in the wheel
-        for i in range(pixels.count()):
-            pixels.set_pixel(i, wheel(((i * 256 // pixels.count()) + j) % 256) )
-        pixels.show()
-        sleep(0.5)
+    def start_party():
+        for j in range(256): # one cycle of all 256 colors in the wheel
+            for i in range(pixels.count()):
+                pixels.set_pixel(i, wheel(((i * 256 // pixels.count()) + j) % 256) )
+            pixels.show()
+            sleep(0.5)
 
-    return "PARTY!!\n"
+    thread = Thread(target=start_party)
+    thread.start()
+    return "PARTY STARTED!!\n"
 
 @app.route('/lights/power', methods=['GET', 'POST'])
 
